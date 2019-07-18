@@ -1842,7 +1842,9 @@ init(int argc, char *argv[])
 						   "are mutually exclusive");
 			shared_log = strace_popen(outfname + 1);
 		} else if (followfork < 2) {
+			open_append = 1;
 			shared_log = strace_fopen(outfname);
+			open_append = 0;
 		} else if (strlen(outfname) >= PATH_MAX - sizeof(int) * 3) {
 			errno = ENAMETOOLONG;
 			perror_msg_and_die("%s", outfname);
